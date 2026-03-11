@@ -50,3 +50,44 @@ http://localhost:8502
 
 - Ammar Shibli
 - B V Vedamurthi
+
+
+
+
+
+
+##  Deployment and Execution Guide
+
+###  Clone the Repository
+
+git clone https://github.com/PRIYAGUNAR/marine-oil-spill-detection.git
+cd marine-oil-spill-detection
+
+   Before running the project install the reqiured Python packages 
+   
+     pip install -r requirements.txt
+
+## Download the oil spill dataset and place it inside the "data" folder.
+
+* Example
+marine-oil-spill-detection/
+│
+├── data/
+│   ├── train
+│   ├── test
+│
+├── notebooks/
+├── models/
+└── README.md
+
+## Execute the training or detection notebook/script:
+
+jupyter notebook
+
+Open the project notebook and run all cells to train and test the model
+
+
+## The system classifies satellite image pixels into:
+
+  Oil Spill & Clean Water
+  
