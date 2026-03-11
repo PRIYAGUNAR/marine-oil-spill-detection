@@ -1,0 +1,36 @@
+# ── Virtual Environment ──
+venv/
+env/
+.env/
+.venv/
+
+# ── Dataset (large files, not for git) ──
+split_dataset-20260310T093208Z-1-001/
+split_dataset/
+*.zip
+
+# ── Model weights ──
+*.pth
+*.pt
+*.h5
+*.pkl
+
+# ── Python cache ──
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# ── Training logs (regenerated during training) ──
+training_log.csv
+
+# ── Jupyter Notebook checkpoints ──
+.ipynb_checkpoints/
+
+# ── OS files ──
+Thumbs.db
+.DS_Store
+
+# ── IDE ──
+.vscode/
+.idea/
