@@ -8,3 +8,4 @@ matplotlib
 fastapi
 uvicorn
 python-multipart
+streamlit
