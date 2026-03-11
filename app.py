@@ -3,8 +3,6 @@ import torch
 import torch.nn as nn
 from PIL import Image
 import numpy as np
-import io
-import base64
 
 class DoubleConv(nn.Module):
     def __init__(self, in_channels: int, out_channels: int):
