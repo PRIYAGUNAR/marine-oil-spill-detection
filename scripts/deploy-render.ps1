@@ -13,7 +13,24 @@ if (-not (Test-Path "render.yaml")) {
 $branch = (git branch --show-current).Trim()
 Write-Host "Current branch: $branch"
 Write-Host "Pushing latest code to origin/$branch ..."
-git add README.md requirements.txt api.py Dockerfile .dockerignore render.yaml scripts/deploy-local.ps1 scripts/test-predict.ps1 scripts/deploy-render.ps1
+$filesToStage = @(
+    "README.md",
+    "requirements.txt",
+    "api.py",
+    "Dockerfile",
+    ".dockerignore",
+    "render.yaml",
+    "scripts/deploy-local.ps1",
+    "scripts/test-predict.ps1",
+    "scripts/deploy-render.ps1"
+)
+
+$existingFiles = $filesToStage | Where-Object { Test-Path $_ }
+if ($existingFiles.Count -eq 0) {
+    throw "No deployment files found to stage."
+}
+
+git add -- $existingFiles
 try {
     git commit -m "chore: prepare cloud deployment" | Out-Null
 } catch {
