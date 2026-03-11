@@ -1,93 +1,52 @@
 # marine-oil-spill-detection
 
+This project detects marine oil spills from uploaded images using a trained PyTorch U-Net model. The current deployment target is a Streamlit web app.
 
-## Deployable Inference API
+## Project files
 
-This branch now includes a deployment-ready FastAPI service for oil-spill mask prediction.
+- `app.py`: Streamlit web application for upload and prediction
+- `api.py`: FastAPI inference API
+- `best_model_1 (1).pth`: trained model checkpoint
+- `requirements.txt`: Python dependencies
 
-### Start locally (Windows PowerShell)
+## Run locally
+
+Install dependencies:
 
 ```powershell
 python -m pip install -r requirements.txt
-uvicorn api:app --host 0.0.0.0 --port 8000
 ```
 
-Check health endpoint:
+Start the Streamlit app:
 
 ```powershell
-Invoke-RestMethod http://127.0.0.1:8000/health
+python -m streamlit run app.py --server.port 8502
 ```
 
-Run prediction on one image:
+Open the app in your browser:
 
-```powershell
-curl.exe -X POST "http://127.0.0.1:8000/predict?threshold=0.5&return_mask=true" -F "file=@D:/path/to/your/image.png"
+```text
+http://localhost:8502
 ```
 
-### Deploy using Docker
+## Deploy on Streamlit Community Cloud
 
-Build image:
+1. Push the latest code to GitHub.
+2. Open https://share.streamlit.io/.
+3. Click `New app`.
+4. Select the repository `PRIYAGUNAR/marine-oil-spill-detection`.
+5. Select branch `main`.
+6. Set the main file path to `app.py`.
+7. Click `Deploy`.
 
-```powershell
-docker build -t marine-oil-spill-api:latest .
-```
+## Model details
 
-Run container:
-
-```powershell
-docker run --rm -p 8000:8000 marine-oil-spill-api:latest
-```
-
-Then test:
-
-```powershell
-Invoke-RestMethod http://127.0.0.1:8000/health
-```
-
-Notes:
-- The API loads checkpoint: best_model_1 (1).pth.
-- Input images are converted to grayscale and resized to 512x512 before inference.
-- The response includes oil_ratio and an optional PNG mask as base64.
-
-### Cloud Deploy (Render)
-
-This project includes render.yaml, so deploy with Render Blueprint.
-
-1. Push this branch to GitHub.
-2. Open: https://dashboard.render.com/blueprint/new
-3. Connect your repository.
-4. Render will detect render.yaml and create the web service.
-5. After deploy, test:
-
-```powershell
-Invoke-RestMethod https://<your-render-service>.onrender.com/health
-```
-
-### One-click scripts (Windows)
-
-Local deploy (install, start, health-check):
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/deploy-local.ps1
-```
-
-Real image prediction test:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/test-predict.ps1 -ImagePath test_inputs/lena.jpg
-```
-
-Prepare and push for Render deploy:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/deploy-render.ps1
-```
-
-
+- Model architecture: Legacy U-Net
+- Framework: PyTorch
+- Input preprocessing: grayscale conversion and resize to `512 x 512`
+- Output: predicted oil-spill mask and oil ratio
 
 ## Report Preparation Team
-
-The following members are responsible for preparing the project report for this project.
 
 - Ammar Shibli
 - B V Vedamurthi
